@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FEAR</title>
+<style>
+  body {
+    font-family: ' c h e c k o n m e ', Arial, sans-serif; 
+    text-align: center;
+    margin: 0;
+    padding: 0;
+    background-color: #000;
+    color: #ff0000;
+    overflow: hidden;
+  }
+  .glitch-background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: 
+      linear-gradient(90deg, rgba(0,0,0,0) 0%, rgba(255,0,0,0.8) 10%, rgba(0,0,0,0) 20%),
+      linear-gradient(0deg, rgba(0,0,0,0) 0%, rgba(255,0,0,0.8) 10%, rgba(0,0,0,0) 20%);
+    background-size: 400% 100%;
+    animation: glitch-background 5s infinite linear;
+  }
+  @keyframes glitch-background {
+    0% {
+      background-position: 0 0;
+    }
+    50% {
+      background-position: 100% 0;
+    }
+    100% {
+      background-position: 0 0;
+    }
+  }
+  .countdown {
+    font-size: 72px;
+    font-weight: bold;
+    color: #ff0000;
+    text-shadow: 0 0 20px rgba(255, 0, 0, 0.8), 0 0 40px rgba(255, 0, 0, 0.8), 0 0 60px rgba(255, 0, 0, 0.8);
+    margin-bottom: 40px;
+    position: relative;
+    animation: glitch 1s infinite;
+  }
+  h1 {
+    font-size: 56px;
+    font-weight: bold;
+    color: #ff0000;
+    text-shadow: 0 0 20px rgba(255, 0, 0, 0.8), 0 0 40px rgba(255, 0, 0, 0.8), 0 0 60px rgba(255, 0, 0, 0.8);
+    margin-bottom: 40px;
+    position: relative;
+    animation: move 2s infinite alternate;
+  }
+  @keyframes glitch {
+    2%, 64% {
+      transform: translateX(3px) skew(0deg);
+    }
+    4%, 60% {
+      transform: translateX(-3px) skew(0deg);
+    }
+    62% {
+      transform: translateX(0) skew(7deg);
+    }
+  }
+  @keyframes move {
+    0% {
+      transform: translateX(0);
+    }
+    100% {
+      transform: translateX(15px);
+    }
+  }
+  .eye {
+    font-size: 72px;
+    animation: blink 1.5s infinite;
+    transform-origin: center bottom;
+    display: inline-block;
+  }
+  @keyframes blink {
+    0%, 50%, 100% {
+      transform: scaleY(0.1);
+    }
+    25%, 75% {
+      transform: scaleY(1);
+    }
+  }
+  .pulse {
+    animation: pulse 2s infinite;
+  }
+  @keyframes pulse {
+    0% {
+      transform: scale(1);
+    }
+    50% {
+      transform: scale(1.1);
+    }
+    100% {
+      transform: scale(1);
+    }
+  }
+</style>
+</head>
+<body>
+
+<div class="glitch-background"></div>
+
+<h1 class="pulse">  S T A Y    W I T H    M E  </h1>
+<div id="countdown" class="countdown pulse"></div>
+
+<script>
+function updateCountdown() {
+  // Set the date we're counting down to (10:00 AM tomorrow)
+  var countDownDate = new Date("July 2, 2024 10:00:00").getTime();
+
+  // Update the countdown every 1 second
+  var x = setInterval(function() {
+
+    // Get today's date and time
+    var now = new Date().getTime();
+    
+    // Find the distance between now and the countdown date
+    var distance = countDownDate - now;
+    
+    // Time calculations for days, hours, minutes and seconds
+    var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+    var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+    var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+    
+    // Display the countdown in the element with id="countdown"
+    document.getElementById("countdown").innerHTML = days + "d " + hours + "h "
+    + minutes + "m " + seconds + "s ";
+    
+    // If the countdown is over, display a message
+    if (distance < 0) {
+      clearInterval(x);
+      document.getElementById("countdown").innerHTML = " I T    I S    T I M E";
+    }
+  }, 1000);
+}
+
+// Call updateCountdown initially to start the countdown
+updateCountdown();
+
+// Update the countdown every second
+setInterval(updateCountdown, 1000);
+</script>
+
+</body>
+</html>
